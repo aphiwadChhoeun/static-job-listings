@@ -1,7 +1,9 @@
-class Test {
-  constructor() {
-    alert('new instance of Test');
-  }
-}
+import Vue from "vue";
 
-new Test();
+import HelloWorld from "./components/HelloWorld"
+
+const app = new Vue({
+  components: {
+    HelloWorld
+  }
+}).$mount('#app');
