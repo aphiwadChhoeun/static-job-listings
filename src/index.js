@@ -1,3 +1,4 @@
+import "./global.scss"
 import Vue from "vue";
 
 import HelloWorld from "./components/HelloWorld"
