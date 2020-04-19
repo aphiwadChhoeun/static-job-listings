@@ -19,7 +19,7 @@
 @import "../mixins";
 
 #filter-container {
-  background: $LIGHT_CYAN;
+  background: $WHITE_COLOR;
   padding: 24px;
   border-radius: 4px;
   box-sizing: border-box;
