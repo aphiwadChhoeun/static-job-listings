@@ -26,13 +26,14 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  margin-top: -110px;
+  margin-top: -185px;
   position: absolute;
   width: 100%;
 
   @include breakpoint("desktop") {
     align-items: center;
     flex-direction: row;
+    margin-top: -110px;
   }
 
   .filter {
