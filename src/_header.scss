@@ -1,0 +1,10 @@
+header {
+  width: 100%;
+  height: 156px;
+  background-image: url("../images/bg-header-mobile.svg");
+  background-color: $PRIMARY_COLOR;
+
+  @include breakpoint("desktop") {
+    background-image: url("../images/bg-header-desktop.svg");
+  }
+}

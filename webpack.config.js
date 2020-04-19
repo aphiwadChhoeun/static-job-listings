@@ -27,8 +27,12 @@ module.exports = {
       },
       {
         test: /\.s[ac]ss$/i,
-        use: ["vue-style-loader", "css-loader", "sass-loader"],
+        use: ["style-loader", "vue-style-loader", "css-loader", "sass-loader"],
       },
+      {
+        test: /\.svg$/,
+        use: "svg-url-loader"
+      }
     ],
   },
   resolve: {

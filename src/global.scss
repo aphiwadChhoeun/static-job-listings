@@ -1,6 +1,22 @@
+@import "./variables";
+@import "./mixins";
+@import "./header";
+
 body {
+
+  margin: 0;
+  background-color: $LIGHT_CYAN_2;
+
   * {
-    font-family: "Spartan", sans-serif;
+    font-family: $FONT_SPARTAN;
+  }
+
+  #app {
+    margin: 32px 16px;
+
+    @include breakpoint("desktop") {
+      margin: 76px 165px;
+    }
   }
 
   .attribution {
