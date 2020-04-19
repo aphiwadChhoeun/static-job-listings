@@ -1,10 +1,10 @@
-import "./global.scss"
+import "./global.scss";
 import Vue from "vue";
 
-import HelloWorld from "./components/HelloWorld"
+import JobListing from "./components/JobListing";
 
 const app = new Vue({
   components: {
-    HelloWorld
-  }
-}).$mount('#app');
+    JobListing,
+  },
+}).$mount("#app");

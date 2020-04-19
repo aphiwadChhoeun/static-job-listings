@@ -1,58 +1,56 @@
 <template>
-  <div>
-    <!-- Item Start -->
-    <div class="job-item">
-      <div class="job__logo">
-        <img src="images/photosnap.svg" alt="Photosnap" />
+  <!-- Item Start -->
+  <div class="job-item">
+    <div class="job__logo">
+      <img :src="job.logo" :alt="job.company" />
+    </div>
+
+    <div class="job-item__main-copy">
+      <div class="job-item__header">
+        <span class="meta__company">
+          {{ job.company }}
+        </span>
+        <span class="meta__pill meta__pill--primary" v-if="job.new">
+          New!
+        </span>
+        <span class="meta__pill meta__pill--secondary" v-if="job.featured">
+          Featured
+        </span>
       </div>
 
-      <div class="job-item__main-copy">
-        <div class="job-item__header">
-          <span class="meta__company">
-            Photosnap
-          </span>
-          <span class="meta__pill meta__pill--primary">
-            New!
-          </span>
-          <span class="meta__pill meta__pill--secondary">
-            Featured
-          </span>
-        </div>
-
-        <div class="job-item__body">
-          <div class="job__title">
-            Senior Frontend Developer
-          </div>
-        </div>
-
-        <div class="job-item__footer">
-          <div class="job__sub">
-            1d ago
-          </div>
-
-          <div class="job__sub">
-            Full Time
-          </div>
-
-          <div class="job__sub">
-            USA only
-          </div>
+      <div class="job-item__body">
+        <div class="job__title">
+          {{ job.position }}
         </div>
       </div>
 
-      <div class="job-item__side">
-        <!-- Role -->
-        <span class="job-tag">Frontend</span>
-        <!-- Level -->
-        <span class="job-tag">Senior</span>
-        <!-- Languages -->
-        <span class="job-tag">HTML</span>
-        <span class="job-tag">CSS</span>
-        <span class="job-tag">JavaScript</span>
+      <div class="job-item__footer">
+        <div class="job__sub">
+          {{ job.postedAt }}
+        </div>
+
+        <div class="job__sub">
+          {{ job.contract }}
+        </div>
+
+        <div class="job__sub">
+          {{ job.location }}
+        </div>
       </div>
     </div>
-    <!-- Item End -->
+
+    <div class="job-item__side">
+      <!-- Role -->
+      <span class="job-tag">{{ job.role }}</span>
+      <!-- Level -->
+      <span class="job-tag">{{ job.level }}</span>
+      <!-- Languages -->
+      <span class="job-tag" v-for="lang in job.languages" :key="lang">
+        {{ lang }}
+      </span>
+    </div>
   </div>
+  <!-- Item End -->
 </template>
 
 <style lang="scss">
@@ -66,6 +64,7 @@
   border-left: 4px $PRIMARY_COLOR solid;
   display: flex;
   align-items: center;
+  margin-bottom: 24px;
 
   &__main-copy {
     flex: 1;
@@ -148,6 +147,9 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "JobItem",
+  props: {
+    job: Object,
+  },
 };
 </script>
