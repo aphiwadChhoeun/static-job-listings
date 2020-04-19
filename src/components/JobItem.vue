@@ -41,11 +41,18 @@
 
     <div class="job-item__side">
       <!-- Role -->
-      <span class="job-tag">{{ job.role }}</span>
+      <span class="job-tag" @click="roleClicked(job.role)">{{ job.role }}</span>
       <!-- Level -->
-      <span class="job-tag">{{ job.level }}</span>
+      <span class="job-tag" @click="lvlClicked(job.level)">{{
+        job.level
+      }}</span>
       <!-- Languages -->
-      <span class="job-tag" v-for="lang in job.languages" :key="lang">
+      <span
+        class="job-tag"
+        v-for="lang in job.languages"
+        :key="lang"
+        @click="langClicked(lang)"
+      >
         {{ lang }}
       </span>
     </div>
@@ -62,7 +69,6 @@
   padding: 24px;
   border-radius: 4px;
   box-sizing: border-box;
-  border-left: 4px $PRIMARY_COLOR solid;
   display: flex;
   margin-bottom: 40px;
   align-items: flex-start;
@@ -79,7 +85,6 @@
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 10px rgba($PRIMARY_COLOR, 0.2);
-    cursor: pointer;
     transition: all 200ms ease-out;
   }
 
@@ -190,9 +195,16 @@
       margin-bottom: 10px;
       padding: 4px;
       border-radius: 4px;
+      font-size: $TEXT_SIZE - 2;
+      cursor: pointer;
 
       @include breakpoint("desktop") {
         margin-bottom: 0;
+      }
+
+      &:hover {
+        background-color: $PRIMARY_COLOR;
+        color: $LIGHT_CYAN;
       }
     }
   }
@@ -204,6 +216,22 @@ export default {
   name: "JobItem",
   props: {
     job: Object,
+  },
+  methods: {
+    roleClicked(tag) {
+      // console.log(tag);
+      this.$emit("filterAdded", { type: "role", value: tag });
+    },
+
+    lvlClicked(tag) {
+      // console.log(tag);
+      this.$emit("filterAdded", { type: "level", value: tag });
+    },
+
+    langClicked(tag) {
+      // console.log(tag);
+      this.$emit("filterAdded", { type: "language", value: tag });
+    },
   },
 };
 </script>

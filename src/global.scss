@@ -12,10 +12,11 @@ body {
   }
 
   #app {
-    margin: 55px 16px;
+    margin: 0 16px;
+    position: relative;
 
     @include breakpoint("desktop") {
-      margin: 76px 165px;
+      margin: 0 165px;
     }
   }
 
