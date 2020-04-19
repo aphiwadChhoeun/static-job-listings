@@ -11,6 +11,7 @@
 
 .filter-tag {
   color: $PRIMARY_COLOR;
+  display: inline-block;
   background-color: $LIGHT_CYAN_2;
   margin-right: 5px;
   margin-bottom: 10px;

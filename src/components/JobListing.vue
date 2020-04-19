@@ -1,23 +1,28 @@
 <template>
   <div>
-    <job-filter-bar
-      v-if="filters.length > 0"
-      :filters="filters"
-      v-on:removeFilter="filterRemoved"
-    ></job-filter-bar>
+    <transition name="fade">
+      <job-filter-bar
+        v-if="filters.length > 0"
+        :filters="filters"
+        v-on:removeFilter="filterRemoved"
+        v-on:clearFilters="filtersCleared"
+      ></job-filter-bar>
+    </transition>
 
     <div id="job-listing-container">
-      <job-item
-        v-for="job in jobs"
-        :key="job.id"
-        :job="job"
-        v-on:addFilter="filterAdded"
-      ></job-item>
+      <transition-group name="job__list__anim" tag="div">
+        <job-item
+          v-for="job in jobs"
+          :key="job.id"
+          :job="job"
+          v-on:addFilter="filterAdded"
+        ></job-item>
+      </transition-group>
     </div>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../mixins";
 
 #job-listing-container {
@@ -26,6 +31,26 @@
   @include breakpoint("desktop") {
     margin: 76px 0;
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.job__list__anim-enter-active,
+.job__list__anim-leave-active {
+  transition: all 200ms ease-in;
+}
+.job__list__anim-enter,
+.job__list__anim-leave-to {
+  opacity: 0;
+}
+.job__list__anim-move {
+  transition: transform 200ms ease-out;
 }
 </style>
 
@@ -91,6 +116,7 @@ export default {
         this.filters.push(filter);
       }
     },
+
     filterRemoved(filter) {
       this.filters.splice(
         this.filters.findIndex(
@@ -98,6 +124,10 @@ export default {
         ),
         1
       );
+    },
+
+    filtersCleared() {
+      this.filters = [];
     },
   },
 };
