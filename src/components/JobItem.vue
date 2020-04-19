@@ -55,6 +55,7 @@
 
 <style lang="scss">
 @import "../variables";
+@import "../mixins";
 
 .job-item {
   background: $LIGHT_CYAN;
@@ -63,21 +64,51 @@
   box-sizing: border-box;
   border-left: 4px $PRIMARY_COLOR solid;
   display: flex;
-  align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 40px;
+  align-items: flex-start;
+  flex-direction: column;
 
   transition: all 200ms ease-in;
 
+  @include breakpoint("desktop") {
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 24px;
+  }
+
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 10px rgba($PRIMARY_COLOR, .2);
+    box-shadow: 0 8px 10px rgba($PRIMARY_COLOR, 0.2);
     cursor: pointer;
     transition: all 200ms ease-out;
   }
 
+  .job__logo {
+    width: 48px;
+    height: auto;
+    margin-top: -50px;
+
+    img {
+      width: 100%;
+    }
+
+    @include breakpoint("desktop") {
+      margin-top: 0;
+      width: auto;
+    }
+  }
+
   &__main-copy {
     flex: 1;
-    padding-left: 25px;
+    padding-left: 0px;
+    padding-top: 12px;
+    padding-bottom: 15px;
+
+    @include breakpoint("desktop") {
+      padding-top: 0;
+      padding-left: 25px;
+      padding-bottom: 0;
+    }
 
     .job-item__header {
       .meta {
@@ -141,14 +172,28 @@
   &__side {
     flex: 1;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding-top: 15px;
+    border-top: 1px solid #c0c2c1;
+
+    @include breakpoint("desktop") {
+      border-top: none;
+      padding-top: 0;
+      justify-content: flex-end;
+    }
 
     .job-tag {
       color: $PRIMARY_COLOR;
       background-color: $LIGHT_CYAN_2;
-      margin: 0 5px;
+      margin-right: 5px;
+      margin-bottom: 10px;
       padding: 4px;
       border-radius: 4px;
+
+      @include breakpoint("desktop") {
+        margin-bottom: 0;
+      }
     }
   }
 }
