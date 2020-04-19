@@ -4,8 +4,9 @@
   "description": "![Design preview for the Job Listings coding challenge](./design/desktop-preview.jpg)",
   "private": true,
   "scripts": {
-    "build": "webpack",
-    "dev": "webpack --watch"
+    "build": "webpack --mode=development",
+    "dev": "webpack --mode=development --watch",
+    "prod": "webpack"
   },
   "repository": {
     "type": "git",
