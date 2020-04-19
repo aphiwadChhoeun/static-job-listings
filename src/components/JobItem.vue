@@ -220,17 +220,17 @@ export default {
   methods: {
     roleClicked(tag) {
       // console.log(tag);
-      this.$emit("filterAdded", { type: "role", value: tag });
+      this.$emit("addFilter", { type: "role", value: tag });
     },
 
     lvlClicked(tag) {
       // console.log(tag);
-      this.$emit("filterAdded", { type: "level", value: tag });
+      this.$emit("addFilter", { type: "level", value: tag });
     },
 
     langClicked(tag) {
       // console.log(tag);
-      this.$emit("filterAdded", { type: "language", value: tag });
+      this.$emit("addFilter", { type: "language", value: tag });
     },
   },
 };

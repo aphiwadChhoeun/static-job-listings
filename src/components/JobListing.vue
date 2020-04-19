@@ -3,6 +3,7 @@
     <job-filter-bar
       v-if="filters.length > 0"
       :filters="filters"
+      v-on:removeFilter="filterRemoved"
     ></job-filter-bar>
 
     <div id="job-listing-container">
@@ -10,7 +11,7 @@
         v-for="job in jobs"
         :key="job.id"
         :job="job"
-        v-on:filterAdded="filterAdded"
+        v-on:addFilter="filterAdded"
       ></job-item>
     </div>
   </div>
@@ -41,44 +42,42 @@ export default {
   },
   data() {
     return {
+      jobs: data,
       filters: [],
     };
   },
-  computed: {
-    jobs() {
-      if (this.filters.length == 0) {
-        return data;
+  watch: {
+    filters(newFilters, oldFilters) {
+      if (newFilters.length == 0) {
+        this.jobs = data;
+        return;
       }
 
-      let roleFilters = this.filters.map((f) =>
+      let roleFilters = newFilters.map((f) =>
         f.type == "role" ? f.value : null
       );
-      let levelFilters = this.filters.map((f) =>
+      let levelFilters = newFilters.map((f) =>
         f.type == "level" ? f.value : null
       );
-      let langFilters = this.filters.map((f) =>
+      let langFilters = newFilters.map((f) =>
         f.type == "language" ? f.value : null
       );
 
-      let result = data.filter((el) => {
-        let foundRole = roleFilters.includes(el.role);
-        let foundLevel = levelFilters.includes(el.level);
-        let foundLanguage = false;
-        if (el.hasOwnProperty("languages")) {
-          if (el.languages.length == 1) {
-            foundLanguage = langFilters.includes(el.languages.pop());
-          } else if (el.languages.length > 1) {
-            let merged = [...langFilters, ...el.languages];
-            let s = new Set(merged);
+      this.jobs = data.filter((job) => {
+        let foundRole = roleFilters.includes(job.role);
+        let foundLevel = levelFilters.includes(job.level);
 
-            return merged.length !== s.size;
+        let foundLanguages = false;
+
+        if (job.hasOwnProperty("languages")) {
+          for (let i = 0; i < job.languages.length; i++) {
+            foundLanguages = langFilters.includes(job.languages[i]);
+            if (foundLanguages >= 0) break;
           }
         }
 
-        return foundRole || foundLevel || foundLanguage;
+        return foundRole || foundLevel || foundLanguages;
       });
-
-      return result;
     },
   },
   methods: {
@@ -91,6 +90,14 @@ export default {
       ) {
         this.filters.push(filter);
       }
+    },
+    filterRemoved(filter) {
+      this.filters.splice(
+        this.filters.findIndex(
+          (el) => el.type == filter.type && el.value == filter.value
+        ),
+        1
+      );
     },
   },
 };

@@ -1,5 +1,8 @@
 <template>
-  <div class="filter-tag">{{ tag.value }}</div>
+  <div class="filter-tag">
+    <span class="filter-tag__text">{{ tag.value }}</span>
+    <span class="icon-remove"></span>
+  </div>
 </template>
 
 <style lang="scss">
@@ -23,6 +26,14 @@
   &:hover {
     background-color: $PRIMARY_COLOR;
     color: $LIGHT_CYAN;
+  }
+
+  .icon-remove {
+    background-image: url("../../images/icon-remove.svg");
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
   }
 }
 </style>

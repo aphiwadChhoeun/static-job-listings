@@ -4,6 +4,7 @@
       v-for="filter in filters"
       :key="filter.value"
       :tag="filter"
+      @click.native="removeFilter(filter)"
     ></filter-tag>
   </div>
 </template>
@@ -41,6 +42,11 @@ export default {
   },
   props: {
     filters: Array,
+  },
+  methods: {
+    removeFilter(tag) {
+      this.$emit("removeFilter", tag);
+    },
   },
 };
 </script>
