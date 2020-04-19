@@ -66,6 +66,15 @@
   align-items: center;
   margin-bottom: 24px;
 
+  transition: all 200ms ease-in;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 10px rgba($PRIMARY_COLOR, .2);
+    cursor: pointer;
+    transition: all 200ms ease-out;
+  }
+
   &__main-copy {
     flex: 1;
     padding-left: 25px;
@@ -139,7 +148,7 @@
       background-color: $LIGHT_CYAN_2;
       margin: 0 5px;
       padding: 4px;
-      border-radius: 2px;
+      border-radius: 4px;
     }
   }
 }
