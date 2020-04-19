@@ -108,8 +108,11 @@
     padding-left: 0px;
     padding-top: 12px;
     padding-bottom: 15px;
+    width: 100%;
+    border-bottom: 1px solid #c0c2c1;
 
     @include breakpoint("desktop") {
+      border-bottom: none;
       padding-top: 0;
       padding-left: 25px;
       padding-bottom: 0;
@@ -180,10 +183,8 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     padding-top: 15px;
-    border-top: 1px solid #c0c2c1;
 
     @include breakpoint("desktop") {
-      border-top: none;
       padding-top: 0;
       justify-content: flex-end;
     }
