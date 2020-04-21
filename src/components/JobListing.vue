@@ -97,7 +97,7 @@ export default {
         if (job.hasOwnProperty("languages")) {
           for (let i = 0; i < job.languages.length; i++) {
             foundLanguages = langFilters.includes(job.languages[i]);
-            if (foundLanguages >= 0) break;
+            if (foundLanguages) break;
           }
         }
 
