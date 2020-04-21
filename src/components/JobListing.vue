@@ -15,6 +15,9 @@
           v-for="job in jobs"
           :key="job.id"
           :job="job"
+          :roleFilters="roleFilters"
+          :levelFilters="levelFilters"
+          :langFilters="langFilters"
           v-on:addFilter="filterAdded"
         ></job-item>
       </transition-group>
@@ -69,6 +72,9 @@ export default {
     return {
       jobs: data,
       filters: [],
+      roleFilters: [],
+      levelFilters: [],
+      langFilters: [],
     };
   },
   watch: {
@@ -78,25 +84,25 @@ export default {
         return;
       }
 
-      let roleFilters = newFilters.map((f) =>
+      this.roleFilters = newFilters.map((f) =>
         f.type == "role" ? f.value : null
       );
-      let levelFilters = newFilters.map((f) =>
+      this.levelFilters = newFilters.map((f) =>
         f.type == "level" ? f.value : null
       );
-      let langFilters = newFilters.map((f) =>
+      this.langFilters = newFilters.map((f) =>
         f.type == "language" ? f.value : null
       );
 
       this.jobs = data.filter((job) => {
-        let foundRole = roleFilters.includes(job.role);
-        let foundLevel = levelFilters.includes(job.level);
+        let foundRole = this.roleFilters.includes(job.role);
+        let foundLevel = this.levelFilters.includes(job.level);
 
         let foundLanguages = false;
 
         if (job.hasOwnProperty("languages")) {
           for (let i = 0; i < job.languages.length; i++) {
-            foundLanguages = langFilters.includes(job.languages[i]);
+            foundLanguages = this.langFilters.includes(job.languages[i]);
             if (foundLanguages) break;
           }
         }
@@ -128,6 +134,9 @@ export default {
 
     filtersCleared() {
       this.filters = [];
+      this.roleFilters = [];
+      this.levelFilters = [];
+      this.langFilters = [];
     },
   },
 };

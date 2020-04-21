@@ -41,14 +41,15 @@
 
     <div class="job-item__side">
       <!-- Role -->
-      <span class="job-tag" @click="roleClicked(job.role)">{{ job.role }}</span>
+      <span class="job-tag" :class="{active: roleFilters.indexOf(job.role) >= 0}" @click="roleClicked(job.role)">{{ job.role }}</span>
       <!-- Level -->
-      <span class="job-tag" @click="lvlClicked(job.level)">{{
+      <span class="job-tag" :class="{active: levelFilters.indexOf(job.level) >= 0}" @click="lvlClicked(job.level)">{{
         job.level
       }}</span>
       <!-- Languages -->
       <span
         class="job-tag"
+        :class="{active: langFilters.indexOf(lang) >= 0}"
         v-for="lang in job.languages"
         :key="lang"
         @click="langClicked(lang)"
@@ -203,6 +204,11 @@
         margin-bottom: 0;
       }
 
+      &.active {
+        background-color: $PRIMARY_COLOR;
+        color: $LIGHT_CYAN;
+      }
+
       &:hover {
         background-color: $PRIMARY_COLOR;
         color: $LIGHT_CYAN;
@@ -217,6 +223,9 @@ export default {
   name: "JobItem",
   props: {
     job: Object,
+    roleFilters: Array,
+    levelFilters: Array,
+    langFilters: Array
   },
   methods: {
     roleClicked(tag) {
